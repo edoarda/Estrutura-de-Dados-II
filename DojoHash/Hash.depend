@@ -1,0 +1,59 @@
+# depslib dependency file v1.0
+1439260984 source:d:\leandro amorim\skydrive\programação\ed2\dojohash\cliente.c
+	<string.h>
+	<stdlib.h>
+	"cliente.h"
+
+1439260990 d:\leandro amorim\skydrive\programação\ed2\dojohash\cliente.h
+	<stdio.h>
+
+1439260826 source:d:\leandro amorim\skydrive\programação\ed2\dojohash\compartimento_hash.c
+	<string.h>
+	<stdlib.h>
+	<stdarg.h>
+	"compartimento_hash.h"
+
+1439260802 d:\leandro amorim\skydrive\programação\ed2\dojohash\compartimento_hash.h
+	<stdio.h>
+
+1439261144 source:d:\leandro amorim\skydrive\programação\ed2\dojohash\lista_clientes.c
+	<stdlib.h>
+	<stdarg.h>
+	"lista_clientes.h"
+
+1438799208 d:\leandro amorim\skydrive\programação\ed2\dojohash\lista_clientes.h
+	"cliente.h"
+
+1439261148 source:d:\leandro amorim\skydrive\programação\ed2\dojohash\lista_compartimentos.c
+	<stdlib.h>
+	<stdarg.h>
+	"lista_compartimentos.h"
+	"compartimento_hash.h"
+
+1438810446 d:\leandro amorim\skydrive\programação\ed2\dojohash\lista_compartimentos.h
+	"compartimento_hash.h"
+
+1438843976 source:d:\leandro amorim\skydrive\programação\ed2\dojohash\test_encadeamento_exterior.c
+	<limits.h>
+	<stdlib.h>
+	"ufftest.h"
+	"lista_clientes.h"
+	"cliente.h"
+	"lista_compartimentos.h"
+	"compartimento_hash.h"
+	"encadeamento_exterior.h"
+
+1438842454 d:\leandro amorim\skydrive\programação\ed2\dojohash\ufftest.h
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+
+1438809776 d:\leandro amorim\skydrive\programação\ed2\dojohash\encadeamento_exterior.h
+
+1452251811 source:d:\leandro amorim\skydrive\programação\ed2\dojohash\encadeamento_exterior.c
+	<limits.h>
+	<stdlib.h>
+	<stdio.h>
+	"encadeamento_exterior.h"
+
