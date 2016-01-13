@@ -51,9 +51,13 @@
 
 1438809776 d:\leandro amorim\skydrive\programação\ed2\dojohash\encadeamento_exterior.h
 
-1452251811 source:d:\leandro amorim\skydrive\programação\ed2\dojohash\encadeamento_exterior.c
+1452684745 source:d:\leandro amorim\skydrive\programação\ed2\dojohash\encadeamento_exterior.c
 	<limits.h>
 	<stdlib.h>
 	<stdio.h>
 	"encadeamento_exterior.h"
+	"compartimento_hash.h"
+	"lista_compartimentos.h"
+	"lista_clientes.h"
+	"cliente.h"
 
