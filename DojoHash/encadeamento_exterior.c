@@ -48,52 +48,55 @@ int busca(int cod_cli, char *nome_arquivo_hash, char *nome_arquivo_dados)
 
 int insere(int cod_cli, char *nome_cli, char *nome_arquivo_hash, char *nome_arquivo_dados, int num_registros)
 {
-    Cliente *cli = cliente(cod_cli, nome_cli, -1, 1);
+    Cliente *cli = cliente(cod_cli, nome_cli, -1, OCUPADO);
     int h = cod_cli % 7;
 
-    FILE *arquivo = fopen(nome_arquivo_hash, "rb");
-	if(arquivo != NULL){
-        fseek(arquivo, (h * sizeof(int)), SEEK_SET);
-        ListaClientes *lisCli = le_clientes(nome_arquivo_dados);
-        int quant = lisCli->qtd;
-        int i;
-        if(quant == 0){
-            lisCli = cria_clientes(1, cli);
-            salva_clientes(nome_arquivo_dados, lisCli);
-
-                CompartimentoHash *cp = compartimento_hash(0);
-                salva_compartimento(compartimento_hash(cp), arquivo);
-            return 0;
-        }
-
-        for(i = 0; i < quant; i++){
-            Cliente *item = lisCli->lista[i];
-            if(item->flag == 0){
-                item = cli;
-                return i;
-            }
-        }
-        return -1;
-	}else{
-        printf("deu xibu");
+	ListaClientes *lisCli = le_clientes(nome_arquivo_dados);
+	ListaCompartimentos *lisComp = le_compartimentos(nome_arquivo_hash);
+	
+	int i;
+	
+	for(i = 0; i < lisCli->qtd; i++){
+		Cliente *atual = lisCli->lista[i];
+		if(atual->cod_cliente == cod_cli){
+			return -1; //detectar insercao de chave existente
+		}
+		if(atual->flag == LIBERADO){
+			lisCli->lista[i] = cli;
+			if(lisComp->lista[h]->prox == -1){
+				lisComp->lista[h] = compartimento_hash(i);
+				salva_compartimentos(nome_arquivo_hash, lisComp);
+			}else{
+				Cliente *tmp = lisCli->lista[h];
+				while(tmp->prox != -1){
+					tmp = lisCli->lista[tmp->prox];
+				}
+				tmp->prox = i;
+			}
+			salva_clientes(nome_arquivo_dados, lisCli);
+			return i;
+		}
 	}
-	fclose(arquivo);
-
-
-
-    /*ListaClientes *lisCli = le_clientes(nome_arquivo_dados);
-    if(lisCli->lista[h] == -1){
-        lisCli->lista[h] = cli;
-        ListaClientes *lc = cria_clientes(num_registros, cli);
-        salva_clientes(nome_arquivo_dados, lc);
-        return 1;
-    }*/
-
-
-    return 1;
-
-
-    return INT_MAX;
+	
+	//insercao
+	ListaClientes *lc = (ListaClientes *)  malloc(sizeof(ListaClientes));
+	lc->qtd = (lisCli->qtd) + 1;
+	lc->lista = (Cliente **) malloc(sizeof(Cliente *) * (lc->qtd));
+	for (i = 0; i < lc->qtd; i++) {
+		if(i < lisCli->qtd){
+			lc->lista[i] = lisCli->lista[i];
+		}else{
+			lc->lista[i] = cli;
+			if(lisComp->lista[h]->prox != -1){
+				lisComp->lista[h]->prox = i;
+				salva_compartimentos(nome_arquivo_hash, lisComp);
+			}
+			salva_clientes(nome_arquivo_dados, lc);
+			return i;
+		}
+	}
+	
+	return INT_MAX;
 }
 
 int exclui(int cod_cli, char *nome_arquivo_hash, char *nome_arquivo_dados)
