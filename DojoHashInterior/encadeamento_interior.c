@@ -11,6 +11,7 @@
 void cria_hash(char *nome_arquivo_hash, int tam)
 {
 	ListaClientes *tab_cliente = cria_clientes(7,
+	    cliente(-1, "", 0, LIBERADO),
 	    cliente(-1, "", 1, LIBERADO),
 		cliente(-1, "", 2, LIBERADO),
 		cliente(-1, "", 3, LIBERADO),
