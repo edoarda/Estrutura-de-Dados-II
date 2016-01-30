@@ -26,16 +26,28 @@ void cria_hash(char *nome_arquivo_hash, int tam)
 int busca(int cod_cli, char *nome_arquivo_hash, int tam, int *encontrou)
 {
 	ListaClientes *lc = le_clientes(nome_arquivo_hash);
-	int quant = lc->qtd;
-    int i;
-    for(i = 0; i < quant; i++){
-        Cliente *item = lc->lista[i];
-        if(item->cod_cliente == cod_cli){
+    int end = cod_cli % 7;
+	int j;
+	while(*encontrou == -1){
+		Cliente *item = lc->lista[end];
+		if(item->flag == LIBERADO){
+			j = end;
+		}
+		if(item->flag == OCUPADO && item->cod_cliente == cod_cli){
 			*encontrou = 1;
-            return i;
-        }
-    }
-    return -1;
+		}else{
+			if(end == item->prox){
+				end = j;
+				*encontrou = 0;
+			}else{
+				end = item->prox;
+			}
+		}
+	}
+	
+	libera_clientes(lc);
+
+    return end;
 }
 
 int insere(int cod_cli, char *nome_cli, char *nome_arquivo_hash, int tam)
