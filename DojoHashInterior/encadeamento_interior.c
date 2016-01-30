@@ -25,8 +25,17 @@ void cria_hash(char *nome_arquivo_hash, int tam)
 
 int busca(int cod_cli, char *nome_arquivo_hash, int tam, int *encontrou)
 {
-	//TODO: Inserir aqui o codigo do algoritmo
-    return INT_MAX;
+	ListaClientes *lc = le_clientes(nome_arquivo_hash);
+	int quant = lc->qtd;
+    int i;
+    for(i = 0; i < quant; i++){
+        Cliente *item = lc->lista[i];
+        if(item->cod_cliente == cod_cli){
+			*encontrou = 1;
+            return i;
+        }
+    }
+    return -1;
 }
 
 int insere(int cod_cli, char *nome_cli, char *nome_arquivo_hash, int tam)
